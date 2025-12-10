@@ -1,21 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-    <ul>
-         
-        {% for x in arrayAlunos %}
+{% extends 'base.html' %}
 
-            <li>{{x.nome}} {{x.idade}}</li>
+{% block title %}Lista de Alunos{% endblock %}
 
-        {% endfor %}
+{% block content %}
 
-    </ul>
+    <div class="row mb-3">
+        <div class="col">
+            <h2>Alunos Cadastrados</h2>
+        </div>
+        <div class="col text-right">
+            <a href="add.html" class="btn btn-primary">+ Novo Aluno</a>
+        </div>
+    </div>
 
-</body>
-</html>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>CPF</th>
+                <th>Data de Nascimento</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for aluno in arrayAlunos %}
+            <tr>
+                <td>{{ aluno.nome }}</td>
+                <td>{{ aluno.idade }}</td>
+                <td>{{ aluno.cpf }}</td>
+                <td>{{ aluno.dataNascimento }}</td>
+                <td>
+                    <a href="#" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="#" class="btn btn-sm btn-danger">Excluir</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">Nenhum aluno cadastrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
